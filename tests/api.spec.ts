@@ -14,7 +14,7 @@ test.describe('API Endpoint JSONPlaceholder Tests', () => {
     expect(Array.isArray(posts)).toBe(true);
     expect(posts.length).toEqual(100);
     expect(posts.length).toBeGreaterThan(0);
-    
+
 
     for (const prop of ['userId', 'id', 'title', 'body']) {
       expect(posts[0]).toHaveProperty(prop);
@@ -28,7 +28,7 @@ test.describe('API Endpoint JSONPlaceholder Tests', () => {
     expect(response.status()).toBe(200);
 
     const post = await response.json();
-    expect(post).toHaveProperty('id', 1);
+    expect(post).toHaveProperty('id', postId);
     expect(post).toHaveProperty('userId');
     expect(post).toHaveProperty('title');
     expect(post).toHaveProperty('body');
@@ -43,8 +43,8 @@ test.describe('API Endpoint JSONPlaceholder Tests', () => {
     const comments = await response.json();
     expect(Array.isArray(comments)).toBe(true);
     expect(comments.length).toBeGreaterThan(0);
-    
-   for (const comment of comments)   {
+
+    for (const comment of comments) {
       expect(comment).toHaveProperty('postId', postId);
       expect(comment).toHaveProperty('id');
       expect(comment).toHaveProperty('name');
@@ -92,7 +92,7 @@ test.describe('API Endpoint JSONPlaceholder Tests', () => {
     expect(createdPost.body).toEqual('new post body');
   });
 
-  test (`PUT /posts/${postId} updates an existing post`, async ({ request }) => {
+  test(`PUT /posts/${postId} updates an existing post`, async ({ request }) => {
     const updatedPost = {
       userId: 1,
       title: 'Updated Post',
@@ -111,7 +111,7 @@ test.describe('API Endpoint JSONPlaceholder Tests', () => {
     expect(post).toMatchObject(updatedPost);
   });
 
-  test (`PATCH /posts/${postId} partially updates a post`, async ({ request }) => {
+  test(`PATCH /posts/${postId} partially updates a post`, async ({ request }) => {
     const partialUpdate = {
       title: 'Partially Updated Post',
     };
@@ -128,7 +128,7 @@ test.describe('API Endpoint JSONPlaceholder Tests', () => {
     expect(post).toHaveProperty('title', partialUpdate.title);
     expect(post).toHaveProperty('userId');
     expect(post).toHaveProperty('body');
-    
+
   });
 
   test(`DELETE /posts/${postId} deletes a post`, async ({ request }) => {
